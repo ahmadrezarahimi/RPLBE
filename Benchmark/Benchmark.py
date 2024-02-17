@@ -111,3 +111,4 @@ Benchmarking
 
 # Uncomment if you want to benchmark encryption and decryption
 # benchmark_enc_dec()
+utils.plot_times()

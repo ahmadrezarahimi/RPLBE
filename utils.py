@@ -383,39 +383,42 @@ def convert_and_save():
 
 
 def plot_times():
-    """
-    Plot the time for each operation based on the data in 'times_rounded.csv'.
+  """
+  Plot the time for each operation based on the data in 'times_rounded.csv'.
 
-    :return: None
-    """
-    # Read the data from the new rounded csv file
-    df = pd.read_csv('times_rounded.csv')
+  :return: None
+  """
+  # Read the data from the new rounded csv file
+  df = pd.read_csv('times_rounded.csv')
 
-    # Set up the figure and axes
-    fig, ax = plt.subplots()
+  # Set up the figure and axes
+  fig, ax = plt.subplots()
 
-    # Convert 'L' column to list for x axis
-    x = df['L'].tolist()
+  # Convert 'L' column to list for x axis
+  x = df['L'].tolist()
 
-    # Each line represents the avg time of each operation
-    operations = ['Setup', 'KGen', 'Aggr', 'Enc', 'Dec']
-    colors = ['b', 'g', 'r', 'c', 'm']
+  # Each line represents the avg time of each operation
+  operations = ['Setup', 'KGen', 'Aggr', 'Enc', 'Dec']
+  colors = ['b', 'g', 'r', 'c', 'm']
 
-    for operation, color in zip(operations, colors):
-        y = df[operation].tolist()
-        ax.plot(x, y, color=color, label=operation)
+  for operation, color in zip(operations, colors):
+      y = df[operation].tolist()
+      ax.plot(x, y, color + 'o-', label=operation)  # Added 'o-' to the color code
 
-    # Set the title, labels, and legend
-    # ax.set_title('Time')
-    ax.set_xlabel('L')
-    ax.set_ylabel('Time (ms, log scale)')
-    ax.set_yscale('log')
-    ax.legend()
+  # Set the title, labels, and legend
+  ax.set_xlabel('L')
+  ax.set_ylabel('Time (ms, log scale)')
+  ax.set_yscale('log')
+  ax.set_xscale('log')
+  ax.set_xticks([16, 64, 256, 1024])  # Set the scale values on X-axis
+  ax.set_xticklabels(['16', '64', '256', '1024'])  # Set the labels for the scales on X-axis
+  ax.legend(loc='upper left')
 
-    # Save and show the plot
-    plt.tight_layout()
-    plt.savefig('plots/operations_time.png')
-    plt.show()
+  # Save and show the plot
+  plt.tight_layout()
+  plt.savefig('plots/operations_time.png')
+  plt.show()
+
 
 """
 ---------------------------------------------------------------------------------------------------------------------
